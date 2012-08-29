@@ -12,7 +12,7 @@ package org.cloudland.dynamic.core.dao;
 import java.sql.ResultSet;
 
 /**
- * 
+ * 数据库表数据操作接口
  * @ClassName Access
  * @Description TODO
  * @author Lei
