@@ -1,0 +1,86 @@
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.cloudland.dynamic</groupId>
+	<artifactId>dynamic-parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>dynamic-parent</name>
+	<url>http://maven.apache.org</url>
+
+	<modules>
+		<module>dynamic-core</module>
+		<module>dynamic-construct</module>
+		<module>dynamic-dao</module>
+		<module>dynamic-operation</module>
+	</modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<dynamic.core.version>0.0.1-SNAPSHOT</dynamic.core.version>
+
+		<junit.version>4.10</junit.version>
+		<apache.commons.lang.version>2.6</apache.commons.lang.version>
+		<java.servlet.api.version>2.5</java.servlet.api.version>
+		<java.servlet.jsp.version>2.2.1</java.servlet.jsp.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+
+			<dependency>
+				<groupId>org.cloudland.dynamic</groupId>
+				<artifactId>dynamic-core</artifactId>
+				<version>${dynamic.core.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<scope>test</scope>
+				<version>${junit.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>${apache.commons.lang.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<scope>provided</scope>
+				<version>${java.servlet.api.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.servlet.jsp</groupId>
+				<artifactId>javax.servlet.jsp-api</artifactId>
+				<version>${java.servlet.jsp.version}</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.5</source>
+						<target>1.5</target>
+					</configuration>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
