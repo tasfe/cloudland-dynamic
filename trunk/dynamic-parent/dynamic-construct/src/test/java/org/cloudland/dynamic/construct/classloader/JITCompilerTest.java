@@ -33,9 +33,7 @@ public class JITCompilerTest {
 		String javaContent = "package org.dynamic.entity;public class Test{private String name;public void setName(String name){this.name = name;}public String getName (){return this.name;}private boolean enable;public void setEnable(boolean enable){this.enable = enable;}public boolean isEnable (){return this.enable;}}";
 		compiler.add(className, javaContent);
 		
-		
-		boolean isSuccess = false;
-		if ((isSuccess = compiler.compiler())){// 动态编译
+		if (compiler.compiler()){// 动态编译
 			try {
 				Class<?> clazz = Class.forName(className);
 
