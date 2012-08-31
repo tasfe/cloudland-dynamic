@@ -27,6 +27,10 @@
 		<apache.commons.lang.version>2.6</apache.commons.lang.version>
 		<java.servlet.api.version>2.5</java.servlet.api.version>
 		<java.servlet.jsp.version>2.2.1</java.servlet.jsp.version>
+		
+		<!-- JDBC drive Connection Version Begin -->
+		<mysql.drive.version>5.1.21</mysql.drive.version>
+		<!-- JDBC drive Connection Version End -->
 	</properties>
 
 	<dependencyManagement>
@@ -63,6 +67,15 @@
 				<artifactId>javax.servlet.jsp-api</artifactId>
 				<version>${java.servlet.jsp.version}</version>
 			</dependency>
+
+
+			<!-- JDBC drive Connection Begin -->
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql.drive.version}</version>
+			</dependency>
+			<!-- JDBC drive Connection End -->
 
 		</dependencies>
 	</dependencyManagement>
