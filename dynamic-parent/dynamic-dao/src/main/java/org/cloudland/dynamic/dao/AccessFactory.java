@@ -9,6 +9,10 @@
   */
 package org.cloudland.dynamic.dao;
 
+import org.cloudland.dynamic.core.dao.Access;
+import org.cloudland.dynamic.dao.connection.ConnectionManager;
+import org.cloudland.dynamic.dao.mysql.MySQLAccess;
+
 /**
  * 
  * @ClassName AccessFactory
@@ -23,5 +27,10 @@ public class AccessFactory {
 	  * 构造方法
 	  */
 	private AccessFactory(){}
+	
+	public static Access openAccess() {
+		
+		return new MySQLAccess(ConnectionManager.getConnection());
+	}
 
 }

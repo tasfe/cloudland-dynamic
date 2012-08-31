@@ -28,6 +28,14 @@ public class MySQLAccess implements Access {
 	  * @Fields conn 框架内部连接对象
 	  */
 	private Connection conn;
+	
+	/**
+	  * 构造函数
+	  * @param conn
+	  */
+	public MySQLAccess(Connection conn) {
+		this.conn = conn;
+	}
 
 	/* 
 	 * Title insert

@@ -24,7 +24,7 @@ public class ConnectionManager {
 	/**
 	  * @Fields CONN 当前应用获取数据库连接的对象
 	  */
-	public static Connection CONN;
+	private static Connection CONN;
 	
 	/**
 	  * 获取数据库连接对象
