@@ -12,6 +12,7 @@ package org.cloudland.dynamic.dao.mysql;
 import java.sql.ResultSet;
 
 import org.cloudland.dynamic.core.dao.Access;
+import org.cloudland.dynamic.dao.connection.Connection;
 
 /**
  * 
@@ -22,6 +23,11 @@ import org.cloudland.dynamic.core.dao.Access;
  *
  */
 public class MySQLAccess implements Access {
+	
+	/**
+	  * @Fields conn 框架内部连接对象
+	  */
+	private Connection conn;
 
 	/* 
 	 * Title insert
