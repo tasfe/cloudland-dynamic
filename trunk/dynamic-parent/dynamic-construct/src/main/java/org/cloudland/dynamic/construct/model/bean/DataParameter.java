@@ -25,6 +25,11 @@ public class DataParameter {
 	private String id;
 	
 	/**
+	  * @Fields fieldName 类字段属性名
+	  */
+	private String fieldName;
+	
+	/**
 	  * @Fields name 参数名称
 	  */
 	private String name;
@@ -43,6 +48,14 @@ public class DataParameter {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getFieldName() {
+		return fieldName;
+	}
+
+	public void setFieldName(String fieldName) {
+		this.fieldName = fieldName;
 	}
 	
 }
