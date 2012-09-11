@@ -35,14 +35,14 @@ public class Column {
 	private int length;
 	
 	/**
-	  * @Fields isNull 是否允许为空
+	  * @Fields empty 是否允许为空
 	  */
-	private boolean isNull;
+	private boolean empty;
 	
 	/**
-	  * @Fields isPrimary 是否是主键列
+	  * @Fields primary 是否是主键列
 	  */
-	private boolean isPrimary;
+	private boolean primaryKey;
 	
 	/**
 	  * @Fields remark 备注
@@ -73,22 +73,6 @@ public class Column {
 		this.length = length;
 	}
 
-	public boolean isNull() {
-		return isNull;
-	}
-
-	public void setNull(boolean isNull) {
-		this.isNull = isNull;
-	}
-
-	public boolean isPrimary() {
-		return isPrimary;
-	}
-
-	public void setPrimary(boolean isPrimary) {
-		this.isPrimary = isPrimary;
-	}
-
 	public String getRemark() {
 		return remark;
 	}
@@ -96,5 +80,21 @@ public class Column {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	
+
+	public boolean isEmpty() {
+		return empty;
+	}
+
+	public void setEmpty(boolean empty) {
+		this.empty = empty;
+	}
+
+	public boolean isPrimaryKey() {
+		return primaryKey;
+	}
+
+	public void setPrimaryKey(boolean primaryKey) {
+		this.primaryKey = primaryKey;
+	}
+
 }
