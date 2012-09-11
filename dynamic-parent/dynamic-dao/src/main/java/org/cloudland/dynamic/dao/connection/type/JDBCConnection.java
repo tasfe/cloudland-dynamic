@@ -33,7 +33,7 @@ public class JDBCConnection extends Connection {
 	@Override
 	protected java.sql.Connection createConnection() {
 		String driver = "com.mysql.jdbc.Driver";
-		String url = "jdbc:mysql://127.0.0.1:3306/mysql";
+		String url = "jdbc:mysql://127.0.0.1:3306/dynamic";
 		String user = "root";
 		String passwd = "";
 		
