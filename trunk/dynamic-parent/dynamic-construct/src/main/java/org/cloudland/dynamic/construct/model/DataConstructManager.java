@@ -23,7 +23,6 @@ import org.cloudland.dynamic.construct.model.bean.DataParameter;
  * @Description TODO
  * @author Lei
  * @date 2012-8-2 下午05:04:03
- *
  */
 public class DataConstructManager {
 	
