@@ -47,6 +47,20 @@ public class DataConstructManager {
 	private DataConstructManager(){}
 	
 	/**
+	  * 拷贝数据模型
+	  * @Title copyDataModel
+	  * @Description 将 original对象数据拷贝到target对象中
+	  * @param target 目标对象
+	  * @param original 原对象
+	  */
+	private void copyDataModel(InsideDataModel target, DataModel original) {
+		target.id = original.getId();
+		target.name = original.getName();
+		target.className = original.getClassName();
+		target.packageName = original.getPackageName();
+	}
+	
+	/**
 	  * 获取数据结构管理类对象
 	  * @Title getInstance
 	  * @Description TODO
@@ -87,8 +101,8 @@ public class DataConstructManager {
 	  */
 	public void add(final DataModel model){
 		InsideDataModel inside = new InsideDataModel();
-		inside.id = model.getId();
-		inside.name = model.getName();
+		// 将外部模型数据存入内部对象中
+		copyDataModel(inside, model);
 		
 		// 新增模型中，参数对象不为空的前提，将其添加到参数对象集合中
 		if (null  != model.getDataParameters() && !model.getDataParameters().isEmpty()) {
@@ -111,7 +125,8 @@ public class DataConstructManager {
 	  */
 	public void update(final DataModel model) {
 		InsideDataModel inside = MODELS.get(model.getId());
-		inside.name = model.getName();
+		// 将外部模型数据存入内部对象中
+		copyDataModel(inside, model);
 		
 		// 新增模型中，参数对象不为空的前提，将其添加到参数对象集合中
 		if (null  != model.getDataParameters() && !model.getDataParameters().isEmpty()) {
@@ -231,6 +246,16 @@ public class DataConstructManager {
 		  * @Fields name 结构名称
 		  */
 		String name;
+		
+		/**
+		  * @Fields className 类名称
+		  */
+		String className;
+		
+		/**
+		  * @Fields packageName 包名称
+		  */
+		String packageName;
 		
 		/**
 		  * @Fields paramsId 结构包含的参数对象编号
