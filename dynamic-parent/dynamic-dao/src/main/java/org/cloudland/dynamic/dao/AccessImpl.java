@@ -9,8 +9,14 @@
   */
 package org.cloudland.dynamic.dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 
+import org.cloudland.dynamic.core.commons.database.DataAdaptation;
+import org.cloudland.dynamic.core.commons.reflect.MethodManager;
+import org.cloudland.dynamic.core.commons.reflect.MethodManager.MethodEntry;
 import org.cloudland.dynamic.core.dao.Access;
 import org.cloudland.dynamic.dao.connection.Connection;
 
@@ -56,8 +62,46 @@ public class AccessImpl implements Access {
 	 * @see org.cloudland.dynamic.core.dao.Access#insert(java.lang.Object)
 	 */
 	public <L> int insert(L object) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		int result = 0;
+
+		String SQL = new String("INSERT INTO %table%(%columnName%) VALUES(%values%)");
+		
+		StringBuffer columnNames = new StringBuffer();
+		StringBuffer values = new StringBuffer();
+		
+		MethodManager manager = new MethodManager(object);
+		/*for (MethodEntry entry : manager.getAllMethodEntry()) {
+			columnNames.append(entry.name() + ",");
+			values.append(DataAdaptation.toDataBase(entry.get()) + ",");
+		}*/
+		for (MethodEntry entry : manager.getAllMethodEntry()) {
+			columnNames.append(entry.name() + ",");
+			values.append("?,");
+		}
+		columnNames.deleteCharAt(columnNames.length() - 1);
+		values.deleteCharAt(values.length() - 1);
+		
+		SQL = SQL.replaceAll("%table%", "c_sys_column");
+		SQL = SQL.replaceAll("%columnName%", columnNames.toString());
+		SQL = SQL.replaceAll("%values%", values.toString());
+		
+		System.out.println(SQL);
+		
+		java.sql.Connection c = conn.get();
+		try {
+			PreparedStatement ps = c.prepareStatement(SQL);
+			for (int i = 0; i < manager.getAllMethodEntry().size(); i++) {
+				MethodEntry entry = manager.getAllMethodEntry().get(i);
+				ps.setObject(i + 1, DataAdaptation.toDataBase(entry.get()));
+			}
+			result = ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 	/* 
@@ -122,8 +166,18 @@ public class AccessImpl implements Access {
 	 * @see org.cloudland.dynamic.core.dao.Access#executeUpdate(java.lang.String)
 	 */
 	public int executeUpdate(String TSQL) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		int result = 0;
+		
+		java.sql.Connection c = conn.get();
+		try {
+			PreparedStatement ps = c.prepareStatement(TSQL);
+			result = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 	/* 
