@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 数据模型描述类
  * @ClassName DataModel
- * @Description TODO
+ * @Description 用以描述一个类的所有信息，如：包名，类名。以及它和数据库表的映射关系。
  * @author Lei
  * @date 2012-8-2 下午04:33:05
  *
@@ -25,6 +25,16 @@ public class DataModel {
 	  * @Fields id 模型编号
 	  */
 	private String id;
+	
+	/**
+	  * @Fields packageName 包名称
+	  */
+	private String packageName;
+	
+	/**
+	  * @Fields className 类名称
+	  */
+	private String className;
 	
 	/**
 	  * @Fields name 模型名称
@@ -58,6 +68,22 @@ public class DataModel {
 
 	public void setDataParameters(List<DataParameter> dataParameters) {
 		this.dataParameters = dataParameters;
+	}
+
+	public String getPackageName() {
+		return packageName;
+	}
+
+	public void setPackageName(String packageName) {
+		this.packageName = packageName;
+	}
+
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
 	}
 	
 }
