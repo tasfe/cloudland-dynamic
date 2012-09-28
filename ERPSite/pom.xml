@@ -21,16 +21,32 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<dynamic.core.version>0.0.1-SNAPSHOT</dynamic.core.version>
+		<dynamic.erp.version>0.0.1-SNAPSHOT</dynamic.erp.version>
 
 		<junit.version>4.10</junit.version>
 		<apache.commons.lang.version>2.6</apache.commons.lang.version>
+
+		<!-- J2EE WebApp Jar -->
 		<java.servlet.api.version>2.5</java.servlet.api.version>
 		<java.servlet.jsp.version>2.2.1</java.servlet.jsp.version>
+
+		<!-- Spring Jar -->
+		<spring.context.version>2.5.6</spring.context.version>
+
+		<!-- log4j Jar -->
+		<apache.log4j.version>1.2.15</apache.log4j.version>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
+
+			<!-- 项目内部关联 Jar Begin -->
+			<dependency>
+				<groupId>org.cloudland.dynamic</groupId>
+				<artifactId>erp-core</artifactId>
+				<version>${dynamic.erp.version}</version>
+			</dependency>
+			<!-- 项目内部关联 Jar End -->
 
 			<dependency>
 				<groupId>junit</groupId>
@@ -38,6 +54,36 @@
 				<scope>test</scope>
 				<version>${junit.version}</version>
 			</dependency>
+
+			<!-- Spring Jar Begin -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${spring.context.version}</version>
+			</dependency>
+			<!-- Spring Jar End -->
+
+			<!-- log4j Jar Begin -->
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>${apache.log4j.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>javax.jms</groupId>
+						<artifactId>jms</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.sun.jmx</groupId>
+						<artifactId>jmxri</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.sun.jdmk</groupId>
+						<artifactId>jmxtools</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<!-- log4j Jar End -->
 
 			<dependency>
 				<groupId>commons-lang</groupId>
@@ -57,12 +103,12 @@
 				<artifactId>javax.servlet.jsp-api</artifactId>
 				<version>${java.servlet.jsp.version}</version>
 			</dependency>
-			
+
 			<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.21</version>
-		</dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>5.1.21</version>
+			</dependency>
 
 		</dependencies>
 	</dependencyManagement>
