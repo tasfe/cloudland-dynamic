@@ -6,10 +6,10 @@
 	<parent>
 		<groupId>org.cloudland.dynamic</groupId>
 		<artifactId>ERPSite</artifactId>
-
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>erp-control</artifactId>
+	<packaging>jar</packaging>
 
 	<name>erp-control</name>
 	<url>http://maven.apache.org</url>
