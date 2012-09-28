@@ -16,6 +16,23 @@
 
 	<dependencies>
 
+		<!-- 项目内部关联 Jar Begin -->
+			<dependency>
+				<groupId>org.cloudland.dynamic</groupId>
+				<artifactId>erp-core</artifactId>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.cloudland.dynamic</groupId>
+				<artifactId>erp-control</artifactId>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.cloudland.dynamic</groupId>
+				<artifactId>erp-dao</artifactId>
+			</dependency>
+			<!-- 项目内部关联 Jar End -->
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
@@ -29,7 +46,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>erp-website</finalName>
+		<finalName>erp</finalName>
 
 		<plugins>
 
