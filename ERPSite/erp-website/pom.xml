@@ -60,8 +60,7 @@
 				<artifactId>maven-jetty-plugin</artifactId>
 				<version>6.1.26</version>
 				<configuration>
-					<webAppSourceDirectory>${basedir}/src/main/webapp
-					</webAppSourceDirectory>
+					<webAppSourceDirectory>${basedir}/src/main/webapp</webAppSourceDirectory>
 				</configuration>
 			</plugin>
 
