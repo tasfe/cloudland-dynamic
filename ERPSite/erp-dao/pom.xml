@@ -8,6 +8,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>erp-dao</artifactId>
+	<packaging>jar</packaging>
 
 	<name>erp-dao</name>
 	<url>http://maven.apache.org</url>
