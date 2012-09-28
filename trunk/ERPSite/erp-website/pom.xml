@@ -17,25 +17,30 @@
 	<dependencies>
 
 		<!-- 项目内部关联 Jar Begin -->
-			<dependency>
-				<groupId>org.cloudland.dynamic</groupId>
-				<artifactId>erp-core</artifactId>
-			</dependency>
-			
-			<dependency>
-				<groupId>org.cloudland.dynamic</groupId>
-				<artifactId>erp-control</artifactId>
-			</dependency>
-			
-			<dependency>
-				<groupId>org.cloudland.dynamic</groupId>
-				<artifactId>erp-dao</artifactId>
-			</dependency>
-			<!-- 项目内部关联 Jar End -->
+		<dependency>
+			<groupId>org.cloudland.dynamic</groupId>
+			<artifactId>erp-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.cloudland.dynamic</groupId>
+			<artifactId>erp-control</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.cloudland.dynamic</groupId>
+			<artifactId>erp-dao</artifactId>
+		</dependency>
+		<!-- 项目内部关联 Jar End -->
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
 		</dependency>
 
 		<dependency>
@@ -55,7 +60,8 @@
 				<artifactId>maven-jetty-plugin</artifactId>
 				<version>6.1.26</version>
 				<configuration>
-					<webAppSourceDirectory>${basedir}/src/main/webapp</webAppSourceDirectory>
+					<webAppSourceDirectory>${basedir}/src/main/webapp
+					</webAppSourceDirectory>
 				</configuration>
 			</plugin>
 
