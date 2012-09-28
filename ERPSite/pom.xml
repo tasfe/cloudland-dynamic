@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>dynamic-parent</name>
+	<name>dynamic-ERPSite</name>
 	<url>http://maven.apache.org</url>
 
 	<modules>
