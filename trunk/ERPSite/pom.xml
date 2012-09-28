@@ -20,8 +20,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		
-		<!--  -->
+
+		<!-- -->
 		<dynamic.erp.version>0.0.1-SNAPSHOT</dynamic.erp.version>
 		<apache.commons.lang.version>2.6</apache.commons.lang.version>
 
@@ -41,7 +41,7 @@
 		<!-- Database Connection Jar -->
 		<mysql.version>5.1.21</mysql.version>
 		<oracle.version>5</oracle.version>
-		
+
 	</properties>
 
 	<dependencyManagement>
@@ -105,6 +105,10 @@
 					<exclusion>
 						<groupId>com.sun.jdmk</groupId>
 						<artifactId>jmxtools</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>javax.mail</groupId>
+						<artifactId>mail</artifactId>
 					</exclusion>
 				</exclusions>
 			</dependency>
