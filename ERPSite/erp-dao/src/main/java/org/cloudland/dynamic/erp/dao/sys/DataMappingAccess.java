@@ -18,7 +18,6 @@ import org.cloudland.dynamic.erp.core.access.Access;
 import org.cloudland.dynamic.erp.core.commons.number.UUID32;
 import org.cloudland.dynamic.erp.dao.conn.ConnectionFactory;
 import org.cloudland.dynamic.erp.dao.sys.entity.DataMapping;
-import org.cloudland.dynamic.erp.dao.sys.entity.DataVerify;
 
 /**
  * 
