@@ -49,7 +49,7 @@ public class DataVerifyAccess implements Access<DataVerify> {
 		
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, UUID32.get());
+			ps.setString(1, verify.getId());
 			ps.setString(2, verify.getRule());
 			ps.setString(3, verify.getMessage());
 			recode = ps.executeUpdate();

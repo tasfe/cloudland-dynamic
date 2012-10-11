@@ -46,7 +46,7 @@ public class DisplayStyleAccess implements Access<DisplayStyle> {
 		String sql = "INSERT INTO c_sys_display_style(id, name, display_style, width, height) VALUES(?, ?, ?, ?, ?)";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, UUID32.get());
+			ps.setString(1, style.getId());
 			ps.setString(2, style.getName());
 			ps.setString(3, style.getDisplayStyle());
 			ps.setString(4, style.getWidth());

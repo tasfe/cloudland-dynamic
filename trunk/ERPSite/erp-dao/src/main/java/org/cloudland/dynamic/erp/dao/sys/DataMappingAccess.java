@@ -50,7 +50,7 @@ public class DataMappingAccess implements Access<DataMapping> {
 		
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, UUID32.get());
+			ps.setString(1, mapping.getId());
 			ps.setString(2, mapping.getSourceType());
 			ps.setString(3, mapping.getDictionaryId());
 			ps.setString(4, mapping.getCustomSQL());
