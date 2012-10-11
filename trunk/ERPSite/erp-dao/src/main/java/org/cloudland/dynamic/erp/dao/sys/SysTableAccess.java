@@ -54,10 +54,8 @@ public class SysTableAccess implements Access<SysTable> {
 		try {
 			conn.setAutoCommit(false);
 			
-			String tableId = UUID32.get();
-			
 			PreparedStatement ps = conn.prepareStatement(sql[0]);
-			ps.setString(1, tableId);
+			ps.setString(1, table.getId());
 			ps.setString(2, table.getName());
 			ps.setString(3, table.getPhysicalName());
 			ps.setString(4, String.valueOf(table.getStatus()));
@@ -66,8 +64,8 @@ public class SysTableAccess implements Access<SysTable> {
 			
 			ps = conn.prepareStatement(sql[1]);
 			for (SysColumn column : table.getColumns()) {
-				ps.setString(1, UUID32.get());
-				ps.setString(2, tableId);
+				ps.setString(1, column.getId());
+				ps.setString(2, table.getId());
 				ps.setString(3, column.getName());
 				ps.setString(4, column.getPhysicalName());
 				ps.setString(5, String.valueOf(column.getValueType()));
