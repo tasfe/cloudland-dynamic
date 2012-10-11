@@ -146,6 +146,80 @@ INSERT INTO `c_sys_table` (`id`,`name`,`table_physical_name`,`create_time`,`type
 /*!40000 ALTER TABLE `c_sys_table` ENABLE KEYS */;
 
 
+--
+-- Definition of table `c_sys_view_model`
+--
+
+DROP TABLE IF EXISTS `c_sys_view_model`;
+CREATE TABLE `c_sys_view_model` (
+  `id` varchar(32) NOT NULL,
+  `view_name` varchar(45) NOT NULL,
+  `view_type` varchar(45) NOT NULL,
+  `view_mode_url` varchar(45) NOT NULL,
+  `data_source_type` varchar(45) NOT NULL,
+  `data_source` varchar(45) NOT NULL,
+  `view_max_number` varchar(45) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `c_sys_view_model`
+--
+
+/*!40000 ALTER TABLE `c_sys_view_model` DISABLE KEYS */;
+/*!40000 ALTER TABLE `c_sys_view_model` ENABLE KEYS */;
+
+
+--
+-- Definition of table `c_sys_view_model_button`
+--
+
+DROP TABLE IF EXISTS `c_sys_view_model_button`;
+CREATE TABLE `c_sys_view_model_button` (
+  `id` varchar(32) NOT NULL,
+  `View_Id` varchar(45) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `event` varchar(45) NOT NULL,
+  `order_number` varchar(45) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `c_sys_view_model_button`
+--
+
+/*!40000 ALTER TABLE `c_sys_view_model_button` DISABLE KEYS */;
+/*!40000 ALTER TABLE `c_sys_view_model_button` ENABLE KEYS */;
+
+
+--
+-- Definition of table `c_sys_view_model_data`
+--
+
+DROP TABLE IF EXISTS `c_sys_view_model_data`;
+CREATE TABLE `c_sys_view_model_data` (
+  `id` varchar(32) NOT NULL,
+  `view_id` varchar(45) NOT NULL,
+  `sys_column_id` varchar(45) NOT NULL,
+  `style_id` varchar(45) NOT NULL,
+  `verify_id` varchar(45) NOT NULL,
+  `data_mapping_id` varchar(45) NOT NULL,
+  `order_number` varchar(45) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `c_sys_view_model_data`
+--
+
+/*!40000 ALTER TABLE `c_sys_view_model_data` DISABLE KEYS */;
+INSERT INTO `c_sys_view_model_data` (`id`,`view_id`,`sys_column_id`,`style_id`,`verify_id`,`data_mapping_id`,`order_number`) VALUES 
+ ('5CECB9F1033F45AA966E91EE64DC2153','58CA0721CCB74E919A2FC13C06A30DFF','系统列1','系统样式1','验证1','映射1','1'),
+ ('9B09B554BA01411E80AF2E6108C719EF','58CA0721CCB74E919A2FC13C06A30DFF','系统列2','系统样式2','验证2','映射2','2'),
+ ('A0850B11126A4413872A8F79F23A59E3','58CA0721CCB74E919A2FC13C06A30DFF','系统列3','系统样式3','验证3','映射3','3');
+/*!40000 ALTER TABLE `c_sys_view_model_data` ENABLE KEYS */;
+
+
 
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
