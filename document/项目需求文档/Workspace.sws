@@ -4,9 +4,10 @@
 
 <Workspace>
 	<Local Expanded="Yes">
+		<Model Expanded="Yes" ID="{83FC2F65-BF17-46D8-B99C-46C34C53EB80}" Loaded="No" Name="数据库模型" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="数据库模型1.pdm"/>
+		<Model Expanded="Yes" ID="{99102789-811A-4473-94A7-D2FCFF6F045B}" Loaded="No" Name="页面地址请求流程" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="页面地址请求流程.oom"/>
+		<Model Expanded="Yes" ID="{CBA35DA9-2C3C-461E-8BCA-FB94FCEFD359}" Loaded="No" Name="类图" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="系统类图.oom"/>
 		<Model Expanded="Yes" ID="{83FC2F65-BF17-46D8-B99C-46C34C53EB80}" Name="数据库模型" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="数据库模型.pdm"/>
-		<Model Expanded="Yes" ID="{99102789-811A-4473-94A7-D2FCFF6F045B}" Name="页面地址请求流程" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="页面地址请求流程.oom"/>
-		<Model Expanded="Yes" ID="{CBA35DA9-2C3C-461E-8BCA-FB94FCEFD359}" Name="类图" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="系统类图.oom"/>
 	</Local>
 	<BrowserModule Name="Repository"/>
 </Workspace>
