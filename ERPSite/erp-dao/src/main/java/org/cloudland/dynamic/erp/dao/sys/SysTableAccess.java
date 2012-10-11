@@ -16,7 +16,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.cloudland.dynamic.erp.core.access.Access;
-import org.cloudland.dynamic.erp.core.commons.number.UUID32;
 import org.cloudland.dynamic.erp.dao.conn.ConnectionFactory;
 import org.cloudland.dynamic.erp.dao.sys.entity.SysColumn;
 import org.cloudland.dynamic.erp.dao.sys.entity.SysTable;
