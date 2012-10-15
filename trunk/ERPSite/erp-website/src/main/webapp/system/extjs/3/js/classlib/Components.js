@@ -16,7 +16,7 @@ org.cloundland.erp.component.LComboBox = Ext.extend(Ext.form.ComboBox, {
 			displayField:'value',
 			valueField:'key',
 			mode:'local',
-			store: new Ext.data.JsonStore({fields:['key', 'value'], data: _config.data})
+			store: new Ext.data.JsonStore({idProperty:'key', fields:['key', 'value'], data: _config.data})
 		};
 		
 		// 将 _config 内容拷贝到 config 中
