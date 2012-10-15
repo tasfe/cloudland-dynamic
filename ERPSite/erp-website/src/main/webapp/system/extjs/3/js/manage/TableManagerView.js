@@ -40,7 +40,7 @@ Ext.onReady(function(){
 							{
 								xtype:'icombo',
 								fieldLabel:'状态', 
-								name:'TableStatus',
+								name:'TableStatus',										
 								data:[{key:'1', value:'测试1'},{key:'2', value:'测试2'}]
 							},
 							{
@@ -80,6 +80,10 @@ Ext.onReady(function(){
 						disableSelection:true,
 						clicksToEdit: 1,
 						
+						//enableColumnHide:false,
+						
+						enableHdMenu:false,
+						
 						colModel:new Ext.grid.ColumnModel({
 						   	defaults: {
 								sortable: true // columns are not sortable by default           
@@ -111,12 +115,16 @@ Ext.onReady(function(){
 									header: '类型',
 									dataIndex: 'valueType',
 									width: 60,
+									renderer:function(_value, _metadata, _rowRecord, _rowIndex, _colIndex, _store){										
+											var coBoxKey = _rowRecord.get('valueType');	
+											var record = this.editor.getStore().getById(coBoxKey);									
+											return record ? record.get('value') : '';
+										},
 									// use shorthand alias defined above
-									editor: ({
-										xtype:'icombo',
-										//transform:'valueType',
+									editor: {
+										xtype:'icombo',																		
 										data:[{key:'0', value:'字符串'},{key:'1', value:'数字'}]
-									})
+									}
 								},
 								{
 									id: 'length',
@@ -134,9 +142,16 @@ Ext.onReady(function(){
 									dataIndex: 'status',
 									width: 60,
 									// use shorthand alias defined above
-									editor: new Ext.form.TextField({
-										allowBlank: false
-									})
+									renderer:function(_value, _metadata, _rowRecord, _rowIndex, _colIndex, _store){										
+											var coBoxKey = _rowRecord.get('status');	
+											var record = this.editor.getStore().getById(coBoxKey);									
+											return record ? record.get('value') : '';
+										},
+									// use shorthand alias defined above
+									editor: {
+										xtype:'icombo',																		
+										data:[{key:'0', value:'禁用'},{key:'1', value:'正常'}]
+									}
 								}
 							]
 						}),
@@ -154,7 +169,8 @@ Ext.onReady(function(){
 										
 						listeners:
 						{
-							'render':function(_this){
+							'render':function(_this){								
+															
 								var grid = _this;
 								var store = grid.getStore();
 								//alert(grid.getStore().recordType);
@@ -162,18 +178,20 @@ Ext.onReady(function(){
 								// access the Record constructor through the grid's store
 								var Plant = store.recordType;
 								var p = new Plant({
-									name: 'New Plant 1',
-									colunmPhysicalName: 'Mostly Shade',
-									valueType:'0',
-									length:5,
-									status:'0'
+									name: '',
+									colunmPhysicalName: '',
+									valueType:'',
+									length:'',
+									status:''
 								});
-								grid.stopEditing();
+								
+								//grid.stopEditing();
+								//alert(1);
 								store.insert(0, p);
 								//grid.startEditing(0, 0);
 							},
 							'rowclick':function(_grid, _rowIndex , _event){
-										
+								
 								//iWrite();
 								 
 								var store = _grid.getStore();													
