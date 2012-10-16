@@ -6,14 +6,14 @@ Ext.onReady(function(){
 	//Ext.MessageBox.alert('Status', 'Changes saved successfully.');
 
 	var tabs = new Ext.TabPanel({
-        renderTo:Ext.getBody(),
+        //renderTo:Ext.getBody(),
         //width:450,
-		//height: 500,
-        activeTab:1,
+		height:290,
+        activeTab:0,
 		minButtonWidth:100,
         //frame:true,
-		plain:true,
-      	defaults:{autoHeight:true}, 
+		//plain:true,
+      	defaults:{autoHeight:true, anchor:"100%"}, 
         items:[
             {
 				title:'常规',
@@ -24,10 +24,10 @@ Ext.onReady(function(){
 				[
 					{
 						xtype:'form',
-						height:300,
+						//height:300,
 						labelAlign: 'top',
-						height:300,
-						defaults:{anchor:"100%", autoHeight:true},
+						//height:300,
+						defaults:{anchor:"100%, 100%", autoHeight:true},
 						autoHeight:false,
 						border:false,		
 						items:
@@ -61,8 +61,8 @@ Ext.onReady(function(){
             {
 				title: '列定义',
 				xtype:'form',
-				height:300,
-				defaults:{anchor:"100%", autoHeight:true},
+				//height:300,
+				defaults:{anchor:"100%, 100%", autoHeight:true},
 				autoHeight:false,		
 				//frame:true,
 				labelAlign: 'top',
@@ -73,7 +73,7 @@ Ext.onReady(function(){
 						name:'editGrid',
 						border:false,
 						//boxMaxHeight: 100,
-						height: 300,
+						//height: 300,
 						//frame: true,
 						autoHeight:false,
 						columnLines:true,
@@ -81,78 +81,58 @@ Ext.onReady(function(){
 						clicksToEdit: 1,
 						
 						//enableColumnHide:false,
+						enableHdMenu:false,   
 						
-						enableHdMenu:false,
-						
-						colModel:new Ext.grid.ColumnModel({
-						   	defaults: {
-								sortable: true // columns are not sortable by default           
-							},
+						colModel:new org.cloundland.erp.component.EditGridColumn({
 							columns:
 							[
 								{
-									id: 'name',
-									header: '名称',
-									dataIndex: 'name',
-									width: 120,
-									// use shorthand alias defined above
-									editor: new Ext.form.TextField({
-										allowBlank: false
-									})
+									id:'name',
+									header:'名称',
+									editType:'field',
+									width:120,
+									vtype:'NotNull'
 								},
 								{
-									id: 'colunmPhysicalName',
+									id:'colunmPhysicalName',
 									header: '物理名称',
-									dataIndex: 'colunmPhysicalName',
-									width: 160,
-									// use shorthand alias defined above
-									editor: new Ext.form.TextField({
-										allowBlank: false
-									})
+									editType:'field',
+									width:160
 								},
 								{
-									id: 'valueType',
-									header: '类型',
-									dataIndex: 'valueType',
-									width: 60,
-									renderer:function(_value, _metadata, _rowRecord, _rowIndex, _colIndex, _store){										
-											var coBoxKey = _rowRecord.get('valueType');	
-											var record = this.editor.getStore().getById(coBoxKey);									
-											return record ? record.get('value') : '';
-										},
-									// use shorthand alias defined above
-									editor: {
-										xtype:'icombo',																		
-										data:[{key:'0', value:'字符串'},{key:'1', value:'数字'}]
-									}
+									id:'valueType',
+									header: '类型',									
+									width:60,
+									editType:'combo',
+									editData:[{key:'0', value:'字符串'},{key:'1', value:'数字'}]
 								},
 								{
 									id: 'length',
 									header: '长度',
-									dataIndex: 'length',
-									width: 50,
-									// use shorthand alias defined above
-									editor: new Ext.form.TextField({
-										allowBlank: false
-									})
+									editType:'field',
+									width:50
 								},
 								{
 									id: 'status',
 									header: '状态',
 									dataIndex: 'status',
-									width: 60,
-									// use shorthand alias defined above
-									renderer:function(_value, _metadata, _rowRecord, _rowIndex, _colIndex, _store){										
-											var coBoxKey = _rowRecord.get('status');	
-											var record = this.editor.getStore().getById(coBoxKey);									
-											return record ? record.get('value') : '';
-										},
-									// use shorthand alias defined above
-									editor: {
-										xtype:'icombo',																		
-										data:[{key:'0', value:'禁用'},{key:'1', value:'正常'}]
-									}
+									width:60,
+									editType:'combo',
+									editData:[{key:'0', value:'禁用'},{key:'1', value:'正常'}]
+								},
+								{
+									xtype: 'actioncolumn',
+									width: 30,
+									items: [{
+										icon:'js/extjs/3.3.1/images/delete.gif',  // Use a URL in the icon config
+										tooltip:'删除',
+										handler:function(_grid, _rowIndex, _colIndex) {
+											alert(1);											
+										}
+									}]
+									 
 								}
+								
 							]
 						}),
 						
@@ -190,9 +170,14 @@ Ext.onReady(function(){
 								store.insert(0, p);
 								//grid.startEditing(0, 0);
 							},
-							'rowclick':function(_grid, _rowIndex , _event){
+							'rowclick':function(_grid, _rowIndex, _event){
 								
 								//iWrite();
+								if (_rowIndex > 0) {
+									var record = _grid.getStore().getAt(_rowIndex - 1);
+									alert(record.isValid());
+								}
+								
 								 
 								var store = _grid.getStore();													
 								var rowsCount = store.getCount();								
@@ -206,10 +191,13 @@ Ext.onReady(function(){
 										length:'',
 										status:''
 									});
-									_grid.stopEditing();
+									//_grid.stopEditing();
 									store.insert(rowsCount + 1, p);
-									_grid.startEditing(rowsCount, 0);
 									
+									
+									//if (_columnIndex > 0) {
+										//_grid.startEditing(rowsCount, 1);
+									//}
 									//_grid.getSelectionModel().selectNext();
 								}
 								
@@ -223,6 +211,30 @@ Ext.onReady(function(){
 			}
         ]
     });
+	
+	
+	var win = new org.cloundland.erp.component.Window({
+                //xtype:'iwindows',
+				title:'数据结果管理',
+                //layout:'fit',
+                width:500,
+                //height:350,
+                closeAction:'hide',
+                //plain: true,
+				
+				
+				items:[tabs],
+				
+				buttons: [{
+                    text:'Submit',
+                    disabled:true
+                },{
+                    text: 'Close',
+                    handler: function(){
+                        win.hide();
+                    }
+                }]
+	}).show();
 
 
 })
