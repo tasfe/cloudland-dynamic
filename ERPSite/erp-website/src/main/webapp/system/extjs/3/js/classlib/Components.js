@@ -1,11 +1,35 @@
 // 自定义组建类
 Ext.namespace('org.cloundland.erp.component');
 
+org.cloundland.erp.component.Window = Ext.extend(Ext.Window, {
+
+	// constructor Begin
+	constructor:function(_config){
+		
+		// 根据内嵌容器的宽度重新设置窗体宽度
+		var windowHeight = _config.items[0].height + 60;
+		
+		var config = 
+		{
+			layout:'fit',
+			border:false,
+			resizable:false, // 禁止调整大小
+			height:windowHeight
+		};
+		
+		// 将 _config 内容拷贝到 config 中
+		Ext.apply(config, _config);	
+		
+		org.cloundland.erp.component.Window.superclass.constructor.call(this, config);
+	}// constructor End
+
+});
+Ext.reg('iwindows', org.cloundland.erp.component.Window); // 注册该组建
+
 // 选择菜单自定义主键类
 org.cloundland.erp.component.LComboBox = Ext.extend(Ext.form.ComboBox, {
 	// constructor Begin
-	constructor:function(_config){
-			
+	constructor:function(_config){			
 
 		var config = 
 		{
@@ -27,6 +51,84 @@ org.cloundland.erp.component.LComboBox = Ext.extend(Ext.form.ComboBox, {
 
 });
 Ext.reg('icombo', org.cloundland.erp.component.LComboBox); // 注册该组建
+
+
+// 编辑表格列模型类
+org.cloundland.erp.component.EditGridColumn = Ext.extend(Ext.grid.ColumnModel, {
+
+	// constructor Begin
+	constructor:function(_config) {
+		
+		var colModel = new Array(_config.columns.length); 		
+		
+		for (i = 0; i < _config.columns.length; i++) {		
+			//iWrite("===" + org.cloundland.erp.component.EditGridColumn.getColunmStyle(_config.columns[i]));		
+			colModel[i] = _config.columns[i].editType ? org.cloundland.erp.component.EditGridColumn.getColunmStyle(_config.columns[i]) : _config.columns[i];
+			//iWrite(_config.columns[i]);	
+		}
+		
+		//iWrite(colModel);
+		var config =
+		{
+			defaults:{
+				sortable:false, // 不可以排序
+				resizable:false // 不可以调整宽度
+			},
+			columns:colModel
+		}
+		// 将 _config 内容拷贝到 config 中
+		Ext.apply(config, _config);	
+		
+		org.cloundland.erp.component.EditGridColumn.superclass.constructor.call(this, config);
+	}// constructor End
+	
+});
+// 根据类型名称创建列显示样式
+org.cloundland.erp.component.EditGridColumn.getColunmStyle = function(columnObj){		
+		var col;
+		
+		var dataindex = columnObj.id;
+		var typeName = columnObj.editType;
+		if (typeName == "field") { // 文本方式编辑
+			col = 
+			{
+				dataIndex:dataindex,
+				editor:new Ext.form.TextField({
+					//blankText:'此值不可以为空',
+					allowBlank:false
+					//vtype:'NotNull'
+				})
+			}			
+		} else if (typeName == "combo") { // 下拉菜单方式便捷
+			col = 
+			{
+				dataIndex:dataindex,
+				renderer:function(_value, _metadata, _rowRecord, _rowIndex, _colIndex, _store){										
+						var coBoxKey = _rowRecord.get(columnObj.id);	
+						var record = this.editor.getStore().getById(coBoxKey);									
+						return record ? record.get('value') : '';
+				},
+				// use shorthand alias defined above
+				editor: {
+					xtype:'icombo',																		
+					data:columnObj.editData
+				}
+			}
+		}
+		
+		// 将扩充的类型添加到原对象中
+		Ext.apply(columnObj, col); 
+}
+
+
+// 不为空验证
+Ext.apply(Ext.form.VTypes, {
+	NotNull:function(value, field){				
+		//return false;
+	},
+	NotNullText:'为空'
+})
+
 
 function iWrite(obj){
 	
