@@ -2,7 +2,8 @@
 Ext.onReady(function(){
 	
 	Ext.QuickTips.init();
-
+	// turn on validation errors beside the field globally
+    Ext.form.Field.prototype.msgTarget = 'side';
 	//Ext.MessageBox.alert('Status', 'Changes saved successfully.');
 
 	var tabs = new Ext.TabPanel({
@@ -17,7 +18,7 @@ Ext.onReady(function(){
         items:[
             {
 				title:'常规',
-				defaults:{autoHeight:true, bodyStyle:'padding:10px'}, 
+				defaults:{autoHeight:true, bodyStyle:'padding:10 14 10 14'}, 
 				//xtype:'form',				
 				//frame:true,				
 				items:
@@ -27,30 +28,53 @@ Ext.onReady(function(){
 						//height:300,
 						labelAlign: 'top',
 						//height:300,
-						defaults:{anchor:"100%, 100%", autoHeight:true},
+						defaults:{anchor:"99%, 100%", autoHeight:true, bodyStyle:'padding:0 6 0 6'},
 						autoHeight:false,
 						border:false,		
 						items:
 						[
 							{
-								xtype:'field', 
-								fieldLabel:'名称[建议使用中文]', 
-								name:'TableName'
+								xtype:'textfield', 
+								fieldLabel:'名称', 
+								emptyText:'建议使用中文',
+								name:'TableName',
+								allowBlank:false,
+								blankText:org.cloundland.erp.Validate.NOT_NULL,
+								maxLength:2,
+								maxLengthText:org.cloundland.erp.Validate.MAX_LENGTH
+								//vtype:'NotNull'
+								//vtypeText:'不能为空'
 							},
 							{
 								xtype:'icombo',
 								fieldLabel:'状态', 
-								name:'TableStatus',										
-								data:[{key:'1', value:'测试1'},{key:'2', value:'测试2'}]
+								name:'TableStatus',						
+								data:[{key:'0', value:'禁用'},{key:'1', value:'正常'}],
+								value:'1'
 							},
 							{
 								xtype:'fieldset',
 								title:'属性',
-								defaults:{anchor:"100%"},
+								defaults:{anchor:"99%"},
 								items:
 								[
-									{xtype:'field', fieldLabel:'物理名称', name:'TablePhysicalName'},							
-									{xtype:'icombo', fieldLabel:'类型', name:'TableType', data:[{key:'1', value:'表'},{key:'2', value:'视图'}]}
+									{
+										xtype:'textfield', 
+										fieldLabel:'物理名称', 
+										emptyText:'数据库表名',
+										name:'TablePhysicalName',
+										allowBlank:false,										
+										blankText:org.cloundland.erp.Validate.NOT_NULL,
+										maxLength:2,
+										maxLengthText:org.cloundland.erp.Validate.MAX_LENGTH
+									},							
+									{
+										xtype:'icombo', 
+										fieldLabel:'类型', 
+										name:'TableType', 
+										data:[{key:'0', value:'表'},{key:'1', value:'视图'}],
+										value:'1'
+									}
 								]
 							}
 						]
@@ -90,8 +114,7 @@ Ext.onReady(function(){
 									id:'name',
 									header:'名称',
 									editType:'field',
-									width:120,
-									vtype:'NotNull'
+									width:120
 								},
 								{
 									id:'colunmPhysicalName',
