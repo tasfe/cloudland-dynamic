@@ -94,11 +94,21 @@ org.cloundland.erp.component.EditGridColumn.getColunmStyle = function(columnObj)
 			{
 				dataIndex:dataindex,
 				editor:new Ext.form.TextField({
-					//blankText:'此值不可以为空',
-					allowBlank:false
+					allowBlank:false,
+					blankText:'此值不可以为空',
+					blankText:org.cloundland.erp.Validate.NOT_NULL,
+					maxLength:2,
+					maxLengthText:org.cloundland.erp.Validate.MAX_LENGTH,
+					listeners:{
+						'blur':function(_this){
+							alert(_this.id);
+							_this.focus();
+							
+						}
+					}				
 					//vtype:'NotNull'
 				})
-			}			
+			};		
 		} else if (typeName == "combo") { // 下拉菜单方式便捷
 			col = 
 			{
@@ -109,25 +119,17 @@ org.cloundland.erp.component.EditGridColumn.getColunmStyle = function(columnObj)
 						return record ? record.get('value') : '';
 				},
 				// use shorthand alias defined above
-				editor: {
+				editor:{
 					xtype:'icombo',																		
 					data:columnObj.editData
 				}
-			}
+			};
 		}
 		
 		// 将扩充的类型添加到原对象中
 		Ext.apply(columnObj, col); 
+		
 }
-
-
-// 不为空验证
-Ext.apply(Ext.form.VTypes, {
-	NotNull:function(value, field){				
-		//return false;
-	},
-	NotNullText:'为空'
-})
 
 
 function iWrite(obj){
