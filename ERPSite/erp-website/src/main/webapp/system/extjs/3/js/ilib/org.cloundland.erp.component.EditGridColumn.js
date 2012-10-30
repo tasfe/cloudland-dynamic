@@ -1,57 +1,49 @@
 // 自定义组建类
 Ext.namespace('org.cloundland.erp.component');
 
-org.cloundland.erp.component.Window = Ext.extend(Ext.Window, {
-
+// 编辑表格
+org.cloundland.erp.component.EditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, {
+	
 	// constructor Begin
-	constructor:function(_config){
+	constructor:function(_config) {
 		
-		// 根据内嵌容器的宽度重新设置窗体宽度
-		var windowHeight = _config.items[0].height + 60;
+		var col = new Array(_config.colModel.length);	
+		
+		// json 字段
+		var jsonFields = new Array(_config.colModel.length);		
+		for (i = 0; i < _config.colModel.length; i++) {
+			//iWrite(_config.colModel[i]);			
+			jsonFields[i] = _config.colModel[i].id;
+			col[i] = _config.colModel[i];
+		}		
+		// json 数据格式
+		var jsonStore = new Ext.data.JsonStore({fields:jsonFields});
+		
+		var colModel = new org.cloundland.erp.component.EditGridColumn({
+			columns:col
+		});
 		
 		var config = 
 		{
-			layout:'fit',
-			border:false,
-			resizable:false, // 禁止调整大小
-			height:windowHeight
+			enableHdMenu:false, // 禁用菜单上的按钮
+			border:false, // 隐藏Panel边框					
+			autoHeight:false,
+			columnLines:true, // 显示表格线
+			disableSelection:true,
+			store:jsonStore,
+			colModel:colModel
+			//clicksToEdit: 1,			
 		};
 		
+		Ext.copyTo(_config, config, 'colModel');
 		// 将 _config 内容拷贝到 config 中
-		Ext.apply(config, _config);	
-		
-		org.cloundland.erp.component.Window.superclass.constructor.call(this, config);
+		Ext.apply(config, _config);				
+		org.cloundland.erp.component.EditorGridPanel.superclass.constructor.call(this, config);	
 	}// constructor End
 
-});
-Ext.reg('iwindows', org.cloundland.erp.component.Window); // 注册该组建
-
-// 选择菜单自定义主键类
-org.cloundland.erp.component.LComboBox = Ext.extend(Ext.form.ComboBox, {
-	// constructor Begin
-	constructor:function(_config){			
-
-		var config = 
-		{
-			editable:false, // 不允许编辑
-			triggerAction:'all', // 显示所有可选项
-			emptyText:'请选择...', // 选择提示信息
-			selectOnFocus:false,
-			displayField:'value',
-			valueField:'key',
-			mode:'local',
-			store: new Ext.data.JsonStore({idProperty:'key', fields:['key', 'value'], data: _config.data})
-		};
-		
-		// 将 _config 内容拷贝到 config 中
-		Ext.apply(config, _config);	
-		
-		org.cloundland.erp.component.LComboBox.superclass.constructor.call(this, config);
-	}// constructor End
 
 });
-Ext.reg('icombo', org.cloundland.erp.component.LComboBox); // 注册该组建
-
+Ext.reg('ieditorgrid', org.cloundland.erp.component.EditorGridPanel); // 注册该组建
 
 // 编辑表格列模型类
 org.cloundland.erp.component.EditGridColumn = Ext.extend(Ext.grid.ColumnModel, {
@@ -64,7 +56,7 @@ org.cloundland.erp.component.EditGridColumn = Ext.extend(Ext.grid.ColumnModel, {
 		for (i = 0; i < _config.columns.length; i++) {		
 			//iWrite("===" + org.cloundland.erp.component.EditGridColumn.getColunmStyle(_config.columns[i]));		
 			colModel[i] = _config.columns[i].editType ? org.cloundland.erp.component.EditGridColumn.getColunmStyle(_config.columns[i]) : _config.columns[i];
-			//iWrite(_config.columns[i]);	
+			iWrite(colModel[i]);	
 		}
 		
 		//iWrite(colModel);
@@ -98,14 +90,7 @@ org.cloundland.erp.component.EditGridColumn.getColunmStyle = function(columnObj)
 					blankText:'此值不可以为空',
 					blankText:org.cloundland.erp.Validate.NOT_NULL,
 					maxLength:2,
-					maxLengthText:org.cloundland.erp.Validate.MAX_LENGTH,
-					listeners:{
-						'blur':function(_this){
-							alert(_this.id);
-							_this.focus();
-							
-						}
-					}				
+					maxLengthText:org.cloundland.erp.Validate.MAX_LENGTH
 					//vtype:'NotNull'
 				})
 			};		
@@ -129,32 +114,6 @@ org.cloundland.erp.component.EditGridColumn.getColunmStyle = function(columnObj)
 		// 将扩充的类型添加到原对象中
 		Ext.apply(columnObj, col); 
 		
-}
-
-
-function iWrite(obj){
-	
-	var htmlWirte = [];
-	htmlWirte.push ("<PRE style='font-size:12px;'>");
-    htmlWirte.push ("<FONT color=blue>时间: </FONT><FONT color=red>" + new Date() + "</FONT>");
-    htmlWirte.push ("<BR/>");
-	
-    htmlWirte.push(obj + "<br>");
-    
-	if(obj){
+		return columnObj;
 		
-		for(index in obj){
-			if(typeof obj[index] != 'function'){
-				htmlWirte.push(index + ":" + obj[index] + "<br>");
-			}
-		}
-		
-	}else{
-		htmlWirte.push(null);
-	}
-	htmlWirte.push("</PRE>");
-	
-	var wirteInfo = window.open("","errorInfo","");
-	wirteInfo.document.write(htmlWirte.join(""));
-	
 }
