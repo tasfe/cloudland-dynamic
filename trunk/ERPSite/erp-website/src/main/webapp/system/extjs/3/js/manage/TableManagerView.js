@@ -29,7 +29,7 @@ Ext.onReady(function(){
 						labelAlign: 'top',
 						//height:300,
 						defaults:{anchor:"99%, 100%", autoHeight:true, bodyStyle:'padding:0 6 0 6'},
-						autoHeight:false,
+						//autoHeight:false,
 						border:false,		
 						items:
 						[
@@ -55,7 +55,7 @@ Ext.onReady(function(){
 							{
 								xtype:'fieldset',
 								title:'属性',
-								defaults:{anchor:"99%"},
+								defaults:{anchor:"98%"},
 								items:
 								[
 									{
@@ -93,22 +93,12 @@ Ext.onReady(function(){
 				items:
 				[
 					{
-						xtype:'editorgrid',
-						name:'editGrid',
-						border:false,
-						//boxMaxHeight: 100,
-						//height: 300,
-						//frame: true,
-						autoHeight:false,
-						columnLines:true,
-						disableSelection:true,
-						clicksToEdit: 1,
+						xtype:'ieditorgrid',
+						name:'ieditGrid',						
+						clicksToEdit: 1,		
 						
-						//enableColumnHide:false,
-						enableHdMenu:false,   
-						
-						colModel:new org.cloundland.erp.component.EditGridColumn({
-							columns:
+						colModel:/*new org.cloundland.erp.component.EditGridColumn({
+							columns:*/
 							[
 								{
 									id:'name',
@@ -152,14 +142,12 @@ Ext.onReady(function(){
 										handler:function(_grid, _rowIndex, _colIndex) {
 											alert(1);											
 										}
-									}]
-									 
-								}
-								
-							]
-						}),
+									}]									 
+								}								
+							],
+						//}),
 						
-						store:new Ext.data.JsonStore({
+						/*store:new Ext.data.JsonStore({
 							fields:
 							[
 								'name',
@@ -168,7 +156,7 @@ Ext.onReady(function(){
 								'length',
 								'status'
 							]						
-						}),
+						}),*/
 										
 						listeners:
 						{
@@ -199,6 +187,7 @@ Ext.onReady(function(){
 								if (_rowIndex > 0) {
 									var record = _grid.getStore().getAt(_rowIndex - 1);
 									alert(record.isValid());
+									alert(record.get("name"));
 								}
 								
 								 
