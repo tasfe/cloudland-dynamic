@@ -14,9 +14,9 @@ org.cloundland.erp.Validate.MAX_LENGTH = '允许输入的最大长度为:{0}';
 
 // 不为空验证
 Ext.apply(Ext.form.VTypes, {
-	NotNull:function(value, field){	
+	NotNull:function(value, field){			
 		//alert(org.cloundland.erp.Validate.NOT_NULL);
-		return false;
+		return Ext.isEmpty(value);;
 	},
 	NotNullText:'而是看看'
 });
