@@ -1,6 +1,8 @@
 Ext.onReady(function(){
 	Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
 	
+	var url = '/treeData1.txt';
+	
 	var viewport = new Ext.Viewport({
 		layout:'border',
 		items:
@@ -30,64 +32,59 @@ Ext.onReady(function(){
 					titleCollapse:false
                 },
                 items: 
-				[
-					{
-					   // contentEl: 'west',
-					   //xtype:'panel',
+				[					
+					{								
+						xtype:'treepanel',
 						title:'系统设置',
 						border:false,
-						//iconCls: 'nav' // see the HEAD section for style used
-						items:
-						[
-							{
-								xtype:'treepanel',
-								border:false,
-								autoScroll:true,
-								split:true,
-								loader:new Ext.tree.TreeLoader(),
-								root:new Ext.tree.AsyncTreeNode({
-									expanded: true,
-									children: 
-									[
-										{
-											text: '表结构管理',
-											leaf: true
-										}, 
-										{
-											text: '显示样式管理',
-											leaf: true
-										}, 
-										{
-											text: '验证规则管理',
-											leaf: true
-										},
-										{
-											text: '数据映射关系管理',
-											leaf: true
-										},
-										{
-											text: '菜单管理',
-											leaf: true
-										},
-										{
-											text: '请求地址管理',
-											leaf: true
-										},
-										{
-											text: '显示视图管理',
-											leaf: true
-										},
-										{
-											text: '数字字典',
-											leaf: true
-										}
-									]
-								}),
-								rootVisible:false
-
-							}
-						]						
-					}, 
+						autoScroll:true,
+						split:true,			
+						root:new Ext.tree.AsyncTreeNode({
+							//id:'root',
+							text:'根节点',
+							loader:new Ext.tree.TreeLoader({url:url})
+							/*expanded:true,
+							children:
+							[
+								{
+									text:'表结构管理',
+									leaf:true,
+									href:'#',
+									hrefTarget:''
+								}, 
+								{
+									text:'显示样式管理',
+									leaf:true
+								}, 
+								{
+									text:'验证规则管理',
+									leaf:true
+								},
+								{
+									text:'数据映射关系管理',
+									leaf:true
+								},
+								{
+									text:'菜单管理',
+									leaf:true
+								},
+								{
+									text:'请求地址管理',
+									leaf:true
+								},
+								{
+									text:'显示视图管理',
+									leaf:true
+								},
+								{
+									text:'数字字典',
+									leaf:true
+								}
+							]*/
+						})
+						//rootVisible:false
+					},
+							
 					{
 						title:'暂未开发',
 						//html: '<p>Some settings in here.</p>',
